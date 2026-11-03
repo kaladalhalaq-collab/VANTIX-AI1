@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VANTIX AI – The Future of Intelligent Trading</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--sp:cubic-bezier(.16,1,.3,1);--bg:#03070d;--b:#1688ff;--p:#6c3bff;--up:#00e5a0;--dn:#ff4567;--g:rgba(255,255,255,.05);--l:rgba(255,255,255,.1);--m:#8d97ad}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#fff;font-family:'IBM Plex Sans Arabic','Space Grotesk',sans-serif;line-height:1.7;padding-bottom:70px;overflow-x:hidden}
+[dir=ltr] body{font-family:'Space Grotesk','IBM Plex Sans Arabic',sans-serif}
+#bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%}
+nav{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:12px 5vw;background:rgba(5,6,8,.7);backdrop-filter:blur(14px);border-bottom:1px solid var(--l)}
+.logo{font-family:'Space Grotesk';font-weight:700;letter-spacing:.12em}.logo i{font-style:normal;background:linear-gradient(90deg,var(--b),var(--p));-webkit-background-clip:text;color:transparent}
+nav .links{display:flex;gap:22px;font-size:14px}nav a{color:#cfd6e6;text-decoration:none}nav a:hover{color:#fff}
+.btn{border:0;border-radius:12px;padding:12px 24px;font:inherit;font-weight:700;color:#fff;cursor:pointer;background:linear-gradient(120deg,var(--b),var(--p));box-shadow:0 0 28px rgba(22,136,255,.45);transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(129,60,255,.6)}
+.btn.o{background:var(--g);border:1px solid var(--l);box-shadow:none}
+.sm{padding:6px 14px;font-size:13px}
+section{padding:70px 5vw;max-width:1200px;margin:auto}
+.hero{min-height:82vh;display:flex;flex-direction:column;justify-content:center}
+.pill{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--l);background:var(--g);padding:5px 14px;border-radius:99px;font-size:13px;width:fit-content}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--up);box-shadow:0 0 10px var(--up);animation:pu 1.6s infinite}
+@keyframes pu{50%{opacity:.35}}
+h1{font-family:'Space Grotesk';font-size:clamp(40px,8vw,92px);line-height:1.05;margin:18px 0;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--b),var(--p));-webkit-background-clip:text;color:transparent}
+.lead{max-width:620px;color:#b8c1d6;font-size:18px}
+.cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:44px}
+.card{background:var(--g);border:1px solid var(--l);border-radius:18px;padding:20px;backdrop-filter:blur(12px)}
+.stats b{display:block;font-family:'Space Grotesk';font-size:30px}.stats span{color:var(--m);font-size:13px}
+h2{font-size:clamp(26px,4vw,40px);margin-bottom:8px}.sub{color:var(--m);margin-bottom:26px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card h3{margin-bottom:6px}.card p{color:#aab3c8;font-size:14px}
+.tv{height:460px;border-radius:18px;overflow:hidden;border:1px solid var(--l);margin-top:14px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tabs button{background:var(--g);border:1px solid var(--l);color:#cfd6e6;border-radius:99px;padding:6px 16px;font:inherit;cursor:pointer}
+.tabs button.on{background:var(--b);border-color:var(--b);color:#fff}
+.an{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.drop{position:relative;border:1.5px dashed rgba(255,255,255,.25);border-radius:16px;min-height:260px;display:grid;place-items:center;text-align:center;cursor:pointer;overflow:hidden;color:var(--m)}
+.drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000}
+.laser{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--b),var(--p),transparent);box-shadow:0 0 22px var(--b);top:0;display:none}
+.scan .laser{display:block;animation:ls 1.6s ease-in-out infinite alternate}
+@keyframes ls{to{top:calc(100% - 3px)}}
+select,textarea,input[type=text]{width:100%;background:rgba(0,0,0,.45);border:1px solid var(--l);color:#fff;border-radius:10px;padding:10px;font:inherit;margin-bottom:10px}
+label{font-size:13px;color:var(--m)}
+.res .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--l);font-size:14px}
+.res .row b{font-family:'Space Grotesk';direction:ltr}
+.dir{font-size:34px;font-family:'Space Grotesk';font-weight:700}.buy{color:var(--up)}.sell{color:var(--dn)}
+.err{border:1px solid var(--dn);background:rgba(255,77,94,.08);padding:14px;border-radius:12px;color:#ffb3bb;font-size:14px}
+.chat{display:flex;flex-direction:column;height:420px}
+#msgs{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
+.m{max-width:85%;padding:10px 14px;border-radius:14px;font-size:14px;white-space:pre-wrap}
+.m.u{align-self:flex-start;background:linear-gradient(120deg,var(--b),var(--p))}.m.a{align-self:flex-end;background:var(--g);border:1px solid var(--l)}
+.cr{display:flex;gap:8px}.cr input{margin:0}
+.plan.hot{border-color:var(--p);box-shadow:0 0 40px rgba(129,60,255,.25)}
+.plan .pr{font-family:'Space Grotesk';font-size:34px;margin:6px 0}.plan li{margin:4px 18px;font-size:14px;color:#b8c1d6}
+details{background:var(--g);border:1px solid var(--l);border-radius:12px;padding:14px 18px;margin-bottom:8px}summary{cursor:pointer;font-weight:700}
+details p{color:#aab3c8;margin-top:8px;font-size:14px}
+footer{border-top:1px solid var(--l);padding:30px 5vw;text-align:center;color:var(--m);font-size:13px}
+.bot{display:none;position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(5,6,8,.92);backdrop-filter:blur(14px);border-top:1px solid var(--l);padding:8px 4px calc(8px + env(safe-area-inset-bottom,0px));justify-content:space-around}
+.bot a{color:#cfd6e6;text-decoration:none;font-size:12px;padding:6px 12px;text-align:center}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform 1.2s var(--sp)}.rv.in{opacity:1;transform:none}
+button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+@media(max-width:860px){nav .links{display:none}.bot{display:flex}.stats{grid-template-columns:1fr 1fr}.grid3,.an{grid-template-columns:1fr}.tv{height:380px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+input[type=email],input[type=password],input[type=number]{width:100%;background:rgba(0,0,0,.45);border:1px solid var(--l);color:#fff;border-radius:10px;padding:10px;font:inherit;margin-bottom:10px}
+.mod{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);display:none;place-items:center;padding:16px}.mod.on{display:grid}
+.mod .card{width:min(420px,100%);background:#0b0e16}
+.sec2{display:none}.sec2.on{display:block}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:8px 6px;border-bottom:1px solid var(--l);text-align:start;vertical-align:middle}
+.tblw{overflow-x:auto}
+.k4{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px}.k4 b{display:block;font-family:'Space Grotesk';font-size:22px;direction:ltr;text-align:start}
+.row2{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.row2 input,.row2 select,.row2 textarea{margin:0;width:auto;flex:1;min-width:120px}
+h3.h{margin:24px 0 8px}.up{color:var(--up)}.dn{color:var(--dn)}
+details p{white-space:pre-wrap}.li2{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--l);font-size:14px}
+
+#gl{position:fixed;inset:0;z-index:-1;width:100%;height:100%;display:block}
+body{padding-bottom:104px;-webkit-tap-highlight-color:transparent;overscroll-behavior-y:none}
+nav{position:fixed;top:calc(12px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);width:min(1120px,94vw);border:1px solid var(--l);border-radius:999px;padding:9px 20px;background:rgba(8,11,20,.55);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5);box-shadow:0 10px 40px -12px rgba(22,136,255,.35),inset 0 1px 0 rgba(255,255,255,.08)}
+nav .links{position:relative;padding-bottom:3px}nav .links a{transition:color .3s}nav .links a.on{color:#fff}
+#ind{position:absolute;bottom:-5px;left:0;height:2px;width:0;border-radius:2px;background:linear-gradient(90deg,var(--b),var(--p));box-shadow:0 0 12px var(--b);opacity:0;transition:transform .6s var(--sp),width .6s var(--sp),opacity .3s}
+.hero{padding-top:120px}.hero h1{font-size:clamp(30px,5.4vw,76px);max-width:none;line-height:1.06;text-wrap:balance}
+.hero .ar{font-size:clamp(18px,3vw,28px);color:#cfe0ff;margin-bottom:10px}
+.hero>*{transition:opacity 1.1s var(--sp),transform 1.3s var(--sp)}
+.hero>*:nth-child(2){transition-delay:.12s}.hero>*:nth-child(3){transition-delay:.24s}.hero>*:nth-child(4){transition-delay:.36s}.hero>*:nth-child(5){transition-delay:.48s}.hero>*:nth-child(6){transition-delay:.6s}
+.intro-on:not(.ready) .hero>*{opacity:0;transform:translateY(34px)}
+.card{position:relative;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.02));backdrop-filter:blur(20px) saturate(1.4);-webkit-backdrop-filter:blur(20px) saturate(1.4);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:transform .6s var(--sp),border-color .3s,box-shadow .3s}
+.card:hover{border-color:rgba(22,136,255,.5);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 0 40px -12px rgba(108,59,255,.5)}
+.stats .card::before,.grid3 .card::before,.k4 .card::before{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(260px circle at var(--gx,50%) var(--gy,0%),rgba(120,160,255,.17),transparent 60%);opacity:0;transition:opacity .3s}
+.stats .card:hover::before,.grid3 .card:hover::before,.k4 .card:hover::before{opacity:1}
+.btn{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),inset 0 -8px 16px rgba(0,0,0,.18),0 0 28px rgba(22,136,255,.45);transition:transform .3s var(--sp),box-shadow .3s,scale .2s var(--sp)}
+.btn.o{box-shadow:inset 0 1px 0 rgba(255,255,255,.12)}.btn:active{scale:.96}
+.bot{left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom,0px));border:1px solid var(--l);border-radius:26px;padding:7px 6px;background:rgba(8,11,20,.6);backdrop-filter:blur(22px) saturate(1.5);-webkit-backdrop-filter:blur(22px) saturate(1.5)}
+.bot a{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;font-size:11px;padding:6px 4px;border-radius:18px;transition:background .4s var(--sp),color .3s}
+.bot a.on{background:rgba(22,136,255,.24);color:#fff}
+.bot svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sp{width:34px;height:34px;flex:none;border:3px solid transparent;border-top-color:var(--b);border-right-color:var(--p);border-radius:50%;animation:rot3 1s linear infinite;filter:drop-shadow(0 0 8px var(--b))}
+@keyframes rot3{from{transform:rotateX(55deg) rotateZ(0)}to{transform:rotateX(55deg) rotateZ(360deg)}}
+@keyframes mat{from{opacity:0;transform:perspective(900px) rotateX(16deg) translateY(18px) scale(.97);filter:blur(8px)}}
+.res>*{animation:mat .9s var(--sp) both}
+.scan::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(rgba(22,136,255,.14) 1px,transparent 1px) 0 0/100% 26px,linear-gradient(90deg,rgba(22,136,255,.14) 1px,transparent 1px) 0 0/26px 100%;animation:gridp 1.4s ease-in-out infinite alternate}
+@keyframes gridp{to{opacity:.35}}
+#intro{position:fixed;inset:0;z-index:100;background:#03070d;transition:opacity .9s ease,transform 1s var(--sp)}
+#intro.out{opacity:0;transform:scale(1.06);pointer-events:none}
+#intro canvas{width:100%;height:100%;display:block}
+#intro .sl{position:absolute;left:0;right:0;top:calc(50% + 15vmin);text-align:center;font-family:'Space Grotesk',sans-serif;letter-spacing:.32em;font-size:clamp(11px,2.3vw,20px);color:#cfe0ff;opacity:0;transition:opacity 1.3s;direction:ltr}
+#intro.s .sl{opacity:1}
+#intro .sweep{position:absolute;top:0;bottom:0;width:30%;left:-40%;background:linear-gradient(100deg,transparent,rgba(120,160,255,.38),transparent);transform:skewX(-14deg)}
+#intro.sw .sweep{animation:sw 1.1s ease-in forwards}
+@keyframes sw{to{left:120%}}
+#skip{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));inset-inline-end:16px;z-index:2}
+
+:root{--navy:#061321;--cy:#00d9ff;--gold:#d8a93a;--sw:280px}
+body{background:radial-gradient(1100px 650px at 85% -8%,#061321 0,#03070d 70%) no-repeat,#03070d}
+.gold{color:var(--gold)}
+nav .links{display:none!important}
+.hb{width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--g);border:1px solid var(--l);color:#fff;cursor:pointer;transition:transform .3s var(--sp),background .3s}
+.hb:active{transform:scale(.88)}.hb svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+body.spa section:not(.vshow),body.spa #tape:not(.vshow){display:none}
+body.spa section.vshow{display:block;animation:vin .7s var(--sp)}body.spa section.hero.vshow{display:flex}
+@keyframes vin{from{transform:translateY(18px) scale(.985)}}
+body.spa section:not(.hero){padding-top:104px}
+body.spa #features,body.spa #faq{padding-top:60px}
+body[data-v=markets] #tape{margin-top:92px}body[data-v=markets] #market{padding-top:30px}
+#gate{padding-top:130px}
+/* الشريط الجانبي */
+#side{position:fixed;top:0;bottom:0;inset-inline-start:0;width:280px;z-index:60;display:flex;flex-direction:column;padding:calc(14px + env(safe-area-inset-top,0px)) 12px calc(14px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,rgba(6,19,33,.94),rgba(3,7,13,.95));backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border-inline-end:1px solid var(--l);box-shadow:0 0 60px -20px rgba(0,217,255,.25);transition:transform .55s var(--sp),width .45s var(--sp)}
+[dir=rtl] #side{transform:translateX(105%)}[dir=ltr] #side{transform:translateX(-105%)}
+#side.open{transform:none!important}
+#sbk{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.55);backdrop-filter:blur(3px);opacity:0;pointer-events:none;transition:opacity .4s}#sbk.on{opacity:1;pointer-events:auto}
+#side .sh{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 10px}
+.sl2{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:3px;scrollbar-width:none}.sl2::-webkit-scrollbar{display:none}
+.si{position:relative;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;color:#aebbd1;text-decoration:none;font-size:14.5px;overflow:hidden;white-space:nowrap;transition:background .35s var(--sp),color .25s,transform .35s var(--sp)}
+.si svg{width:22px;height:22px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--sp),filter .3s}
+.si:hover{background:rgba(255,255,255,.06);color:#fff}.si:hover svg{animation:wob .7s var(--sp)}
+.si:active{transform:scale(.97)}.si:active svg{transform:scale(.8) rotate(-10deg)}
+.si.on{color:#fff;background:linear-gradient(100deg,rgba(22,136,255,.28),rgba(108,59,255,.18));box-shadow:inset 0 0 0 1px rgba(0,217,255,.25),0 0 24px -8px rgba(0,217,255,.5)}
+.si.on svg{color:var(--cy);filter:drop-shadow(0 0 6px var(--cy))}
+.si.on::before{content:'';position:absolute;inset-inline-start:0;top:22%;bottom:22%;width:3px;border-radius:3px;background:linear-gradient(var(--cy),var(--b));box-shadow:0 0 10px var(--cy)}
+@keyframes wob{25%{transform:translateY(-3px) rotate(-8deg)}60%{transform:translateY(1px) rotate(6deg)}}
+.rip{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(0,217,255,.45),transparent 70%);width:10px;height:10px;transform:translate(-50%,-50%) scale(0);animation:rip .6s ease-out forwards}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(28);opacity:0}}
+.sf{border-top:1px solid var(--l);padding-top:10px}
+.sacc{display:flex;align-items:center;gap:10px;padding:8px;border-radius:14px;color:#fff;text-decoration:none;transition:background .3s}.sacc:hover{background:rgba(255,255,255,.06)}
+.sn{display:flex;flex-direction:column;line-height:1.3;min-width:0}.sn b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sn small{color:var(--m);font-size:12px}
+.avw{position:relative;width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;overflow:hidden;background:rgba(255,255,255,.08);border:1px solid var(--l);color:#cfe0ff}
+.avw svg{width:55%;height:55%;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round}
+.avw img.av{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.avbig{width:92px;height:92px;border:2px solid rgba(0,217,255,.45);box-shadow:0 0 28px -6px rgba(0,217,255,.6)}
+@media(min-width:1000px){
+  #side{transform:none!important}#sbk{display:none}
+  body.spa{padding-inline-start:var(--sw)}body.rail{--sw:78px}
+  body.rail #side{width:78px}body.rail .si span,body.rail .sn,body.rail #side .logo{display:none}body.rail .si{justify-content:center}body.rail .sacc{justify-content:center}
+  [dir=rtl] nav{left:calc(50% - var(--sw)/2)}[dir=ltr] nav{left:calc(50% + var(--sw)/2)}nav{width:min(1120px,calc(94vw - var(--sw) - 12px))}
+}
+/* شريط التنقل السفلي: ثلاثة أقسام */
+.bot{align-items:flex-end;padding:8px 14px 8px}
+.bot a{flex:1;min-width:0}
+.bot a.ctr{flex:0 0 96px;overflow:visible;background:none!important;padding:0 0 2px;color:#dff6ff}
+.orb3d{position:relative;display:grid;place-items:center;width:68px;height:68px;margin:-38px auto 3px;border-radius:50%;background:radial-gradient(circle at 32% 24%,#b6f8ff 0,#00d9ff 22%,#1688ff 56%,#0a2f7a 100%);border:2px solid rgba(255,255,255,.35);box-shadow:0 14px 26px -4px rgba(0,217,255,.55),0 0 38px rgba(22,136,255,.7),inset 0 -9px 14px rgba(0,20,60,.55),inset 0 7px 10px rgba(255,255,255,.55);animation:glow 3s ease-in-out infinite;transition:transform .45s var(--sp)}
+.orb3d::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:conic-gradient(from 0deg,transparent 0,rgba(0,217,255,.95) 18%,transparent 42%);-webkit-mask:radial-gradient(circle,transparent 63%,#000 65%);mask:radial-gradient(circle,transparent 63%,#000 65%);animation:rot 3.2s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+@keyframes glow{50%{box-shadow:0 16px 30px -4px rgba(0,217,255,.75),0 0 54px rgba(0,217,255,.75),inset 0 -9px 14px rgba(0,20,60,.55),inset 0 7px 10px rgba(255,255,255,.55)}}
+.orb3d svg{width:30px;height:30px;stroke:#fff;filter:drop-shadow(0 2px 3px rgba(0,30,80,.7))}
+.bot a.ctr:active .orb3d{transform:scale(.84) translateY(4px)}
+.bot a.ctr.pop .orb3d{animation:pop .6s var(--sp)}
+@keyframes pop{40%{transform:scale(1.15) translateY(-8px)}}
+.bot a.ctr em{font-style:normal;font-size:11px;font-weight:700}
+.bot .avw{width:26px;height:26px}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><canvas id="gl"></canvas><div id="sbk"></div><aside id="side" aria-label="القائمة الرئيسية"><div class="sh"><div class="logo">VANTIX <i>AI</i></div><button class="hb" id="sbx" aria-label="طي القائمة"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button></div><div class="sl2"><a class="si" href="#home" data-v="home" title="الرئيسية"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span data-ar="الرئيسية" data-en="Home">الرئيسية</span></a><a class="si" href="#analyze" data-v="analyze" title="تحليل الشارت بالذكاء الاصطناعي"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg><span data-ar="تحليل الشارت بالذكاء الاصطناعي" data-en="AI Chart Analysis">تحليل الشارت بالذكاء الاصطناعي</span></a><a class="si" href="#trading" data-v="trading" title="التداول"><svg viewBox="0 0 24 24"><rect x="4" y="8" width="4" height="8" rx="1"/><path d="M6 4v4M6 16v4"/><rect x="16" y="5" width="4" height="10" rx="1"/><path d="M18 2v3M18 15v5"/></svg><span data-ar="التداول" data-en="Trading">التداول</span></a><a class="si" href="#live" data-v="live" title="الصفقات المباشرة"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg><span data-ar="الصفقات المباشرة" data-en="Live Signals">الصفقات المباشرة</span></a><a class="si" href="#history" data-v="history" title="سجل الصفقات"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-ar="سجل الصفقات" data-en="Trade History">سجل الصفقات</span></a><a class="si" href="#markets" data-v="markets" title="أسعار الأسواق"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><span data-ar="أسعار الأسواق" data-en="Markets">أسعار الأسواق</span></a><a class="si" href="#news" data-v="news" title="نبض السوق والأخبار"><svg viewBox="0 0 24 24"><path d="M5 4h12a2 2 0 012 2v14H7a2 2 0 01-2-2z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg><span data-ar="نبض السوق والأخبار" data-en="Market Pulse & News">نبض السوق والأخبار</span></a><a class="si" href="#assistant" data-v="assistant" title="المساعد الذكي"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z"/></svg><span data-ar="المساعد الذكي" data-en="AI Assistant">المساعد الذكي</span></a><a class="si" href="#plans" data-v="plans" title="الاشتراكات والنقاط"><svg viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><span data-ar="الاشتراكات والنقاط" data-en="Plans & Points">الاشتراكات والنقاط</span></a><a class="si" href="#account" data-v="account" title="حسابي"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span data-ar="حسابي" data-en="My Account">حسابي</span></a><a class="si" href="#settings" data-v="settings" title="الإعدادات"><svg viewBox="0 0 24 24"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span data-ar="الإعدادات" data-en="Settings">الإعدادات</span></a><a class="si" href="#academy" data-v="academy" title="الأكاديمية"><svg viewBox="0 0 24 24"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><span data-ar="الأكاديمية" data-en="Academy">الأكاديمية</span></a><a class="si" href="#admin" data-v="admin" title="الإدارة" id="si-admin" style="display:none"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg><span data-ar="الإدارة" data-en="Admin">الإدارة</span></a></div><div class="sf"><a class="sacc" href="#account"><span class="avw"><svg class="avph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><img class="av" alt=""></span><span class="sn"><b id="sf-n">زائر</b><small id="sf-p">سجّل الدخول</small></span></a></div></aside>
+<nav>
+  <div style="display:flex;gap:10px;align-items:center"><button class="hb" id="menu" aria-label="القائمة"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button><div class="logo">VANTIX <i>AI</i></div></div>
+  <div class="links"><a href="#market" data-t="nMarket">الأسواق</a><a href="#analyze" data-t="nAi">التحليل الذكي</a><a href="#assistant" data-t="nAs">المساعد</a><a href="#plans" data-t="nPl">الاشتراكات</a><a href="#faq" data-t="nFaq">الأسئلة</a><a class="li" href="#dash" style="display:none">لوحتي</a><a class="li" href="#auto" style="display:none">تلقائي</a><a class="li" href="#academy" style="display:none">الأكاديمية</a><a id="adl" href="#admin" style="display:none">الإدارة</a></div>
+  <div style="display:flex;gap:8px"><button class="btn sm" id="acct">تسجيل الدخول</button><button class="btn o sm" id="lang">EN</button></div>
+</nav>
+
+<section class="hero">
+  <span class="pill"><i class="dot"></i><span id="sys" data-t="sys">حالة النظام: تحقق من الاتصال…</span></span>
+  <h1>THE FUTURE OF <span>INTELLIGENT</span> TRADING.</h1><p class="ar">مستقبل التحليل المالي يبدأ هنا.</p>
+  <p class="lead" data-t="lead">منصة ذكاء اصطناعي متطورة تجمع التحليل المالي والأسواق العالمية والتكنولوجيا في تجربة واحدة.</p>
+  <div class="cta"><a href="#analyze"><button class="btn" data-t="start">START NOW</button></a><a href="#assistant"><button class="btn o" data-t="explore">EXPLORE PLATFORM</button></a></div>
+  <div class="stats">
+    <div class="card"><b data-n="7">0</b><span data-t="s1">سوق مدعوم</span></div>
+    <div class="card"><b data-n="13">0</b><span data-t="s2">عنصر في بطاقة التحليل</span></div>
+    <div class="card"><b data-n="3">0</b><span data-t="s3">أهداف ربح لكل صفقة</span></div>
+    <div class="card"><b data-n="24">0</b><span data-t="s4">ساعة تغطية للأسواق</span></div>
+  </div>
+</section>
+
+<div id="tape" style="margin:0 0 10px"></div>
+
+<section id="market" class="rv">
+  <h2 data-t="mk">الأسواق المباشرة</h2><p class="sub" data-t="mksub">بيانات من TradingView. التأخير (إن وُجد) يظهر على كل رمز حسب مصدره، وقد تتأخر بعض الأسواق.</p>
+  <div class="tabs" id="mt"></div>
+  <div class="tv" id="chart"></div>
+  <h3 class="h">المفضلة</h3><div class="tabs" id="d-w"><span style="color:var(--m);font-size:14px">سجّل الدخول لاستخدام المفضلة.</span></div>
+</section>
+
+<section id="features" class="rv">
+  <h2 data-t="ft">ماذا يحلل VANTIX؟</h2><p class="sub"> </p>
+  <div class="grid3">
+    <div class="card"><h3>Market Structure</h3><p>BOS · CHoCH · Trend</p></div>
+    <div class="card"><h3>Smart Money</h3><p>Order Blocks · Fair Value Gaps · Liquidity</p></div>
+    <div class="card"><h3>Risk</h3><p>Entry · Stop Loss · TP1 / TP2 / TP3</p></div>
+  </div>
+</section>
+
+<section id="analyze" class="rv">
+  <h2 data-t="anT">لوحة التحليل الذكي</h2><p class="sub" data-t="anS">النتائج تأتي فقط من خدمة الذكاء الاصطناعي الفعلية. عند تعذر الاتصال تظهر رسالة خطأ، ولا تُعرض نتائج بديلة.</p>
+  <div class="an">
+    <div class="card">
+      <div class="drop" id="drop" tabindex="0" role="button"><span id="dt">اضغط أو اسحب صورة الشارت هنا</span><div class="laser"></div></div>
+      <input type="file" id="file" accept="image/*" hidden>
+      <div style="margin-top:12px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><label>Market</label><select id="mk"><option>XAUUSD</option><option>BTCUSD</option><option>ETHUSD</option><option>EURUSD</option><option>GBPUSD</option><option>NASDAQ</option><option>US30</option></select></div>
+        <div><label>Timeframe</label><select id="tfm"><option>M5</option><option>M15</option><option>H1</option><option>H4</option><option>D1</option></select></div>
+        <div><label>Style</label><select id="st"><option>Scalping</option><option>Swing</option></select></div>
+      </div>
+      <button class="btn" id="go" style="width:100%" data-t="an">حلّل الشارت</button>
+    </div>
+    <div class="card res" id="res"><p style="color:var(--m)" data-t="wait">ستظهر بطاقة التحليل هنا.</p></div>
+  </div>
+</section>
+
+<section id="assistant" class="rv">
+  <h2>VANTIX AI ASSISTANT</h2><p class="sub" data-t="asS">اسأل عن التحليل الفني، إدارة رأس المال، أو حركة الذهب. يُحفظ السجل في متصفحك.</p>
+  <div class="card chat"><div id="msgs"></div>
+    <div class="cr"><input type="text" id="q" placeholder="اكتب سؤالك…" aria-label="سؤال"><button class="btn" id="send" data-t="send">إرسال</button></div></div>
+</section>
+
+<section id="plans" class="rv">
+  <h2 data-t="plT">الاشتراكات</h2><p class="sub" data-t="plS">صلاحيات الخطط تُفرض من الـ Backend عبر رمز التفعيل.</p>
+  <div class="grid3">
+    <div class="card plan"><h3>FREE</h3><div class="pr">$0</div><ul><li>Limited analyses</li><li>Limited assistant</li></ul></div>
+    <div class="card plan hot"><h3>PRO</h3><div class="pr">—</div><ul><li>Advanced AI analysis</li><li>Analysis history</li><li>All tools</li></ul></div>
+    <div class="card plan"><h3>VIP</h3><div class="pr">—</div><ul><li>Everything in Pro</li><li>Priority analysis</li><li>Exclusive features</li></ul></div>
+  </div>
+  <div class="card" id="pt-card" style="margin-top:14px"></div>
+  <div class="card" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"><input type="text" id="code" placeholder="Activation code" style="flex:1;margin:0"><button class="btn" id="act" data-t="act">تفعيل</button></div>
+  <p id="actm" style="margin-top:8px;font-size:14px"></p>
+</section>
+
+<section id="faq" class="rv">
+  <h2 data-t="faq">الأسئلة الشائعة</h2><p class="sub"> </p>
+  <details><summary>هل التحليل توصية مالية؟</summary><p>لا. هو أداة مساعدة، والتداول ينطوي على مخاطر خسارة رأس المال.</p></details>
+  <details><summary>كيف يتم التحليل؟</summary><p>تُرسل صورة الشارت إلى خادمك الخلفي الذي يستدعي نموذج Claude بمفتاح محفوظ على الخادم فقط.</p></details>
+  <details><summary>ما الأسواق المدعومة؟</summary><p>الذهب، بيتكوين، إيثريوم، اليورو، الجنيه، ناسداك وداو جونز.</p></details>
+</section>
+
+<section id="trading" class="sec2">
+  <h2>التداول</h2><p class="sub">دفتر صفقاتك وحصص استخدامك. الصفقات هنا سجل لمتابعة أدائك ولا تُنفَّذ لدى وسيط.</p>
+  <div class="k4" id="d-k"></div>
+  <h3 class="h">تسجيل صفقة جديدة</h3>
+  <div class="card row2"><select id="d_m"></select><select id="d_s"><option>BUY</option><option>SELL</option></select><input type="number" id="d_e" step="any" placeholder="سعر الدخول"><button class="btn sm" data-a="addtrade">فتح صفقة</button></div>
+  <p class="sub" style="margin-top:10px;font-size:13px">لإغلاق الصفقة وحساب النتيجة ادخل إلى "سجل الصفقات".</p>
+</section>
+
+<section id="history" class="sec2">
+  <h2>سجل الصفقات</h2><p class="sub">منحنى الأداء وجميع صفقاتك وتحليلاتك السابقة.</p>
+  <div class="card"><canvas id="d-c" style="width:100%;height:180px;display:block"></canvas></div>
+  <h3 class="h">الصفقات</h3><div class="card tblw"><table id="d-t"></table></div>
+  <h3 class="h">آخر التحليلات</h3><div class="card" id="d-a"></div>
+</section>
+
+<section id="news" class="sec2">
+  <h2>نبض السوق والأخبار</h2><p class="sub">أخبار ومؤشر فني مباشر من TradingView، ثم إشعارات وأخبار المنصة.</p>
+  <div class="an"><div class="tv" id="n-tl" style="height:480px;margin:0"></div><div><div class="tabs" id="n-t"></div><div class="tv" id="n-ta" style="height:420px"></div></div></div>
+  <div class="an" style="margin-top:18px"><div><h3 class="h" style="margin-top:0">الإشعارات</h3><div class="card" id="d-n"><span style="color:var(--m);font-size:14px">سجّل الدخول لعرض الإشعارات.</span></div></div>
+  <div><h3 class="h" style="margin-top:0">أخبار المنصة</h3><div class="card" id="d-nw"><span style="color:var(--m);font-size:14px">سجّل الدخول لعرض الأخبار.</span></div></div></div>
+</section>
+
+<section id="account" class="sec2">
+  <h2>حسابي</h2><p class="sub" id="ac-msg" style="min-height:24px"></p>
+  <div class="an">
+    <div class="card">
+      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:14px">
+        <div class="avw avbig"><svg class="avph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><img class="av" alt="الصورة الشخصية"></div>
+        <div><input type="file" id="av_file" accept="image/png,image/jpeg,image/webp" hidden>
+          <button class="btn sm" data-ac="avpick">رفع صورة</button> <button class="btn o sm" data-ac="avdel">إزالة</button>
+          <div style="color:var(--m);font-size:12px;margin-top:6px">JPG أو PNG أو WebP، تُقصّ إلى مربع تلقائيًا.</div></div>
+      </div>
+      <label>الاسم الكامل</label><input type="text" id="ac_name" maxlength="80" autocomplete="name">
+      <label>اسم المستخدم</label><input type="text" id="ac_user" maxlength="24" dir="ltr" placeholder="a-z 0-9 _" autocomplete="username">
+      <label>رقم الهاتف</label><input type="text" id="ac_phone" maxlength="20" dir="ltr" autocomplete="tel">
+      <label>البريد الإلكتروني</label><div id="ac_email" dir="ltr" style="margin-bottom:12px;color:#cfe0ff"></div>
+      <button class="btn" data-ac="saveprof">حفظ البيانات</button>
+    </div>
+    <div class="card"><h3 style="margin-bottom:10px">الاشتراك والاستخدام</h3><div class="k4" id="ac-sub"></div></div>
+  </div>
+  <div class="an" style="margin-top:14px">
+    <div class="card"><h3 style="margin-bottom:10px">تغيير كلمة المرور</h3>
+      <input type="password" id="ac_cur" placeholder="كلمة المرور الحالية" autocomplete="current-password">
+      <input type="password" id="ac_new" placeholder="كلمة المرور الجديدة (8 أحرف فأكثر)" autocomplete="new-password">
+      <button class="btn sm" data-ac="chpw">تغيير</button><p style="color:var(--m);font-size:12px;margin-top:8px">يُنهي تغييرها جميع الجلسات الأخرى.</p></div>
+    <div class="card"><h3 style="margin-bottom:10px">تغيير البريد الإلكتروني</h3>
+      <input type="email" id="ac_em" placeholder="البريد الجديد" dir="ltr" autocomplete="email">
+      <input type="password" id="ac_empw" placeholder="كلمة المرور للتأكيد" autocomplete="current-password">
+      <button class="btn sm" data-ac="chmail">تغيير</button></div>
+  </div>
+  <div class="card" style="margin-top:14px"><h3 style="margin-bottom:6px">التحقق من الحساب</h3><p id="ac-ver" style="color:#b8c1d6;font-size:14px"></p></div>
+  <div class="row2" style="margin-top:14px"><button class="btn o" data-ac="logout">تسجيل الخروج</button><button class="btn" style="background:linear-gradient(120deg,#ff4567,#b3173a);box-shadow:0 0 24px rgba(255,69,103,.35)" data-ac="delacc">حذف الحساب</button></div>
+</section>
+
+<section id="settings" class="sec2">
+  <h2>الإعدادات</h2><p class="sub">اللغة والصوت والحركة.</p>
+  <div class="card" style="display:grid;gap:14px;max-width:560px">
+    <div class="row2" style="justify-content:space-between"><span>اللغة / Language</span><button class="btn o sm" data-ac="lang">EN / AR</button></div>
+    <label style="display:flex;gap:10px;align-items:center;color:#cfd6e6;font-size:15px"><input type="checkbox" id="sFx"> مؤثرات صوتية (متوقفة افتراضيًا)</label>
+    <label style="display:flex;gap:10px;align-items:center;color:#cfd6e6;font-size:15px"><input type="checkbox" id="sAmb"> أجواء صوتية هادئة</label>
+    <label style="display:flex;gap:10px;align-items:center;color:#cfd6e6;font-size:15px"><input type="checkbox" id="sGy"> تأثير الجيروسكوب على الخلفية (الجوال)</label>
+    <div class="row2"><button class="btn o sm" id="sIntro">إعادة عرض المقدمة</button><button class="btn o sm" data-ac="srv">رابط الخادم</button></div>
+  </div>
+</section>
+
+<section id="gate"><div class="card" style="text-align:center;padding:40px 20px;max-width:520px;margin:auto"><h3 id="gate-t">سجّل الدخول للوصول إلى هذه الصفحة</h3><p class="sub" style="margin:8px 0 18px">الحساب يحفظ صفقاتك وتحليلاتك واشتراكك.</p><button class="btn" id="gateBtn">تسجيل الدخول / حساب جديد</button></div></section>
+
+
+<section id="auto" class="sec2">
+  <h2>التحليل التلقائي</h2><p class="sub" id="au-m"></p>
+  <div class="grid3" id="au-l"></div>
+  <p style="color:var(--m);font-size:12px;margin-top:10px">تحليل آلي من بيانات السوق، وليس توصية مالية.</p>
+</section>
+
+<section id="academy" class="sec2">
+  <h2>الأكاديمية</h2><p class="sub">من الأساسيات إلى مفاهيم السيولة والهيكل.</p>
+  <div class="tabs" id="ac-t"><button class="on" data-a="lv" data-id="beginner">Beginner</button><button data-a="lv" data-id="advanced">Advanced</button></div>
+  <div id="ac-l" style="margin-top:14px"></div>
+</section>
+
+<section id="admin" class="sec2">
+  <h2>لوحة الإدارة</h2><p class="sub">كل العمليات تُفرض في الخادم بصلاحية المدير.</p>
+  <div class="k4" id="a-use"></div><div style="margin-top:10px"><button class="btn o sm" data-a="runauto">تشغيل التحليل التلقائي الآن</button></div>
+  <h3 class="h">المستخدمون</h3><div class="card tblw"><table id="a-users"></table></div>
+  <div class="card row2" style="margin-top:10px"><input type="email" id="a_e" placeholder="البريد"><input type="password" id="a_p" placeholder="كلمة المرور"><select id="a_pl"><option>free</option><option>pro</option><option>vip</option></select><input type="number" id="a_d" placeholder="أيام"><select id="a_r"><option>user</option><option>admin</option></select><button class="btn sm" data-a="adduser">إضافة مستخدم</button></div>
+  <h3 class="h">أكواد التفعيل</h3>
+  <div class="card row2"><select id="c_pl"><option>pro</option><option>vip</option></select><input type="number" id="c_d" value="30" placeholder="أيام"><input type="number" id="c_n" value="1" placeholder="العدد"><button class="btn sm" data-a="gencode">توليد</button></div>
+  <textarea id="c_out" rows="3" readonly style="display:none;margin-top:8px"></textarea>
+  <div class="card tblw" style="margin-top:10px"><table id="a-codes"></table></div>
+  <h3 class="h">الحدود والتكلفة</h3><div class="card"><div class="row2" id="a-set"></div><button class="btn sm" data-a="savesets" style="margin-top:10px">حفظ الإعدادات</button></div>
+  <h3 class="h">نشر المحتوى</h3>
+  <div class="card row2"><input type="text" id="n_t" placeholder="عنوان الخبر"><input type="text" id="n_b" placeholder="نص الخبر"><button class="btn sm" data-a="addnews">نشر خبر</button></div>
+  <div class="card row2" style="margin-top:10px"><select id="l_l"><option>beginner</option><option>advanced</option></select><input type="text" id="l_t" placeholder="عنوان الدرس"><input type="text" id="l_u" placeholder="رابط فيديو/صورة https://"><textarea id="l_b" rows="2" placeholder="محتوى الدرس"></textarea><button class="btn sm" data-a="addlesson">إضافة درس</button><button class="btn o sm" data-a="seed">إضافة المنهج الافتراضي</button></div>
+  <div class="card row2" style="margin-top:10px"><input type="text" id="o_t" placeholder="عنوان الإشعار"><input type="text" id="o_b" placeholder="النص"><input type="number" id="o_u" placeholder="رقم مستخدم (فارغ = للجميع)"><button class="btn sm" data-a="addnote">إرسال إشعار</button></div>
+  <div class="an" style="margin-top:14px"><div class="card" id="a-ls"></div><div class="card" id="a-nw"></div></div>
+</section>
+<footer>© VANTIX AI · TRADE SMARTER. THINK BEYOND.<br>Not financial advice.</footer>
+<div class="bot"><a href="#home" data-v="home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span data-ar="الرئيسية" data-en="Home">الرئيسية</span></a><a href="#analyze" class="ctr" data-v="analyze" aria-label="التداول وتحليل الشارت"><span class="orb3d"><svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></span><em data-ar="التداول" data-en="Trade">التداول</em></a><a href="#account" data-v="account"><span class="avw"><svg class="avph" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><img class="av" alt=""></span><span data-ar="حسابي" data-en="Account">حسابي</span></a></div>
+
+
+<div class="mod" id="mod" role="dialog" aria-modal="true"><div class="card">
+  <h3 style="margin-bottom:10px">حسابي</h3>
+  <div id="mout">
+    <label>البريد الإلكتروني</label><input type="email" id="em" autocomplete="email">
+    <label>كلمة المرور (8 أحرف فأكثر)</label><input type="password" id="pw" autocomplete="current-password">
+    <div class="row2"><button class="btn" id="bLogin">دخول</button><button class="btn o" id="bReg">حساب جديد</button></div>
+  </div>
+  <div id="min" style="display:none"><p id="inf"></p><button class="btn o" id="bOut" style="margin-top:10px">تسجيل الخروج</button></div>
+  
+  <label style="display:block;margin-top:14px">رابط الخادم (Backend)</label><input type="text" id="srv" placeholder="https://api.example.com" dir="ltr">
+  <p id="am" style="font-size:13px;color:var(--dn)"></p>
+  <button class="btn o sm" id="bClose">إغلاق</button>
+</div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ===== الإعدادات: ضع رابط الـ Backend هنا ===== */
+let API = (window.VANTIX_API || localStorage.getItem('vx_api') || '').replace(/\/+$/,'');   // مثال: 'https://api.yourdomain.com'
+const $=id=>document.getElementById(id);
+
+/* اللغة */
+const T={en:{nMarket:'Markets',nAi:'AI Analysis',nAs:'Assistant',nPl:'Plans',nFaq:'FAQ',lead:'An advanced AI platform that unites financial analysis, global markets and technology in one experience.',start:'START NOW',explore:'EXPLORE PLATFORM',s1:'Markets',s2:'Fields per analysis',s3:'Take-profit targets',s4:'Hours of coverage',mk:'Live Markets',mksub:'Data from TradingView. Any delay is shown per symbol by its source; some markets may be delayed.',ft:'What VANTIX analyzes',anT:'AI Analysis',anS:'Results come only from the real AI service. If it cannot be reached, an error is shown and no substitute result is displayed.',an:'Analyze chart',wait:'Your analysis card will appear here.',asS:'Ask about technical analysis, risk management or gold. History is saved in your browser.',send:'Send',plT:'Plans',plS:'Plan permissions are enforced by the backend via activation code.',act:'Activate',faq:'FAQ',sys:'System status: checking…'}};
+let lang='ar';const AR={};document.querySelectorAll('[data-t]').forEach(e=>AR[e.dataset.t]=e.textContent);
+$('lang').onclick=()=>{lang=lang==='ar'?'en':'ar';document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';$('lang').textContent=lang==='ar'?'EN':'AR';
+  document.querySelectorAll('[data-t]').forEach(e=>e.textContent=lang==='ar'?AR[e.dataset.t]:(T.en[e.dataset.t]||e.textContent));
+  $('q').placeholder=lang==='ar'?'اكتب سؤالك…':'Ask a question…';checkSys()};
+
+/* خلفية جسيمات */
+(()=>{const c=$('bg'),x=c.getContext('2d');let W,H,P=[];const rs=()=>{W=c.width=innerWidth;H=c.height=innerHeight;P=Array.from({length:Math.min(70,W/18)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3}))};rs();addEventListener('resize',rs);
+let mx=W/2,my=H/2;addEventListener('pointermove',e=>{mx=e.clientX;my=e.clientY});
+(function f(){if(window.__gl){c.style.display='none';return}x.clearRect(0,0,W,H);const g=x.createRadialGradient(mx,my,0,mx,my,380);g.addColorStop(0,'rgba(129,60,255,.16)');g.addColorStop(1,'transparent');x.fillStyle=g;x.fillRect(0,0,W,H);
+P.forEach((a,i)=>{a.x=(a.x+a.vx+W)%W;a.y=(a.y+a.vy+H)%H;x.fillStyle='rgba(22,136,255,.7)';x.fillRect(a.x,a.y,2,2);
+for(let j=i+1;j<P.length;j++){const b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<120){x.strokeStyle=`rgba(129,60,255,${.18*(1-d/120)})`;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()}}});requestAnimationFrame(f)})()})();
+
+/* أرقام متحركة + ظهور */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+document.querySelectorAll('[data-n]').forEach(e=>{const n=+e.dataset.n;let i=0;const t=setInterval(()=>{e.textContent=++i;if(i>=n)clearInterval(t)},900/n)});
+
+/* TradingView: بيانات حية */
+function tv(id,src,cfg){const el=$(id);el.innerHTML='';const w=document.createElement('div');w.className='tradingview-widget-container';w.style.height='100%';const d=document.createElement('div');d.className='tradingview-widget-container__widget';d.style.height='100%';w.appendChild(d);const s=document.createElement('script');s.src='https://s3.tradingview.com/external-embedding/'+src;s.async=true;s.text=JSON.stringify(cfg);w.appendChild(s);el.appendChild(w)}
+const SY=[['XAUUSD','OANDA:XAUUSD'],['BTCUSD','BITSTAMP:BTCUSD'],['ETHUSD','BITSTAMP:ETHUSD'],['EURUSD','FX:EURUSD'],['GBPUSD','FX:GBPUSD'],['NASDAQ','PEPPERSTONE:NAS100'],['US30','TVC:DJI']];
+let tapeInit=0,chartInit=0,newsInit=0;
+function mkTape(){tv('tape','embed-widget-ticker-tape.js',{symbols:SY.map(([n,s])=>({proName:s,title:n})),colorTheme:'dark',isTransparent:true,displayMode:'adaptive',locale:'en'})}
+function chart(s){tv('chart','embed-widget-advanced-chart.js',{autosize:true,symbol:s,interval:'60',theme:'dark',style:'1',locale:'en',backgroundColor:'#050608',allow_symbol_change:false,hide_side_toolbar:false})}
+$('mt').innerHTML=SY.map(([n,s],i)=>`<button class="${i?'':'on'}" data-s="${s}">${n}</button>`).join('');
+$('mt').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#mt button').forEach(x=>x.classList.toggle('on',x===b));chart(b.dataset.s)};
+
+
+/* حالة النظام (فحص حقيقي لـ /api/health) */
+async function checkSys(){const e=$('sys'),ar=lang==='ar';
+  if(!API){e.textContent=ar?'حالة النظام: الـ Backend غير مربوط':'System: backend not connected';document.querySelector('.dot').style.background='var(--dn)';return}
+  try{const r=await fetch(API+'/api/health');if(!r.ok)throw 0;e.textContent=ar?'حالة النظام: متصل':'System: online';document.querySelector('.dot').style.background='var(--up)'}
+  catch{e.textContent=ar?'حالة النظام: الخدمة غير متاحة':'System: unavailable';document.querySelector('.dot').style.background='var(--dn)'}}
+checkSys();
+
+/* رفع الصورة */
+let img=null;const drop=$('drop'),file=$('file');
+const pick=f=>{if(!f||!f.type.startsWith('image/')||f.size>8e6){alert(lang==='ar'?'اختر صورة أقل من 8MB':'Choose an image under 8MB');return}img=f;drop.querySelectorAll('img').forEach(i=>i.remove());const i=new Image();i.src=URL.createObjectURL(f);drop.prepend(i);$('dt').style.display='none'};
+drop.onclick=()=>file.click();drop.onkeydown=e=>{if(e.key==='Enter'||e.key===' ')file.click()};
+file.onchange=()=>pick(file.files[0]);
+drop.ondragover=e=>e.preventDefault();drop.ondrop=e=>{e.preventDefault();pick(e.dataTransfer.files[0])};
+
+const esc=s=>String(s??'—').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const token=()=>localStorage.getItem('vx_token')||'';
+const H=()=>token()?{Authorization:'Bearer '+token()}:{};
+function fail(el,msg){el.innerHTML=`<div class="err">${esc(msg)}</div>`}
+
+$('go').onclick=async()=>{
+  const out=$('res'),ar=lang==='ar';
+  if(!img){fail(out,ar?'ارفع صورة الشارت أولًا.':'Upload a chart image first.');return}
+  if(!API){fail(out,ar?'لم يتم ربط خدمة التحليل. اضبط window.VANTIX_API برابط الـ Backend.':'Analysis service not connected. Set window.VANTIX_API to your backend URL.');return}
+  if(!token()){openAuth();return}
+  const fd=new FormData();fd.append('image',img);fd.append('market',$('mk').value);fd.append('timeframe',$('tfm').value);fd.append('style',$('st').value);fd.append('lang',lang);
+  drop.classList.add('scan');$('go').disabled=true;vxStages(out,ar);
+  try{
+    const r=await fetch(API+'/api/analyze',{method:'POST',body:fd,headers:H()});
+    const j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
+    const buy=/buy/i.test(j.direction);
+    out.innerHTML=`<div class="row"><span>MARKET</span><b>${esc(j.market)}</b></div>
+    <div class="row"><span>DIRECTION</span><b class="dir ${buy?'buy':'sell'}">${esc(j.direction)}</b></div>
+    ${[['ENTRY ZONE',j.entry],['STOP LOSS',j.stop_loss],['TAKE PROFIT 1',j.tp1],['TAKE PROFIT 2',j.tp2],['TAKE PROFIT 3',j.tp3],['AI CONFIDENCE',j.confidence!=null?j.confidence+'%':null],['MARKET STRUCTURE',j.structure]].map(([k,v])=>`<div class="row"><span>${k}</span><b>${esc(v)}</b></div>`).join('')}
+    <p style="margin-top:12px;font-size:14px"><b>ANALYSIS REASON</b><br>${esc(j.reason)}</p>
+    ${j.alt_scenario?`<p style="margin-top:8px;font-size:14px;color:var(--m)"><b>ALT SCENARIO</b><br>${esc(j.alt_scenario)}</p>`:''}`;
+  }catch(e){fail(out,(ar?'تعذر إتمام التحليل: ':'Analysis failed: ')+e.message)}
+  finally{drop.classList.remove('scan');$('go').disabled=false;vxStagesStop()}
+};
+
+/* المساعد + سجل المحادثة */
+let hist=JSON.parse(localStorage.getItem('vx_hist')||'[]');
+const add=(r,t)=>{const d=document.createElement('div');d.className='m '+(r==='user'?'u':'a');d.textContent=t;$('msgs').appendChild(d);$('msgs').scrollTop=1e9;return d};
+hist.forEach(m=>add(m.role,m.content));
+async function send(){const q=$('q').value.trim();if(!q)return;if(!token()){openAuth();return}$('q').value='';add('user',q);hist.push({role:'user',content:q});
+  const b=add('assistant','…');
+  if(!API){b.textContent=lang==='ar'?'الـ Backend غير مربوط. اضبط window.VANTIX_API.':'Backend not connected. Set window.VANTIX_API.';hist.pop();return}
+  try{const r=await fetch(API+'/api/chat',{method:'POST',headers:{'Content-Type':'application/json',...H()},body:JSON.stringify({messages:hist.slice(-20),lang})});
+    const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
+    b.textContent=j.reply;hist.push({role:'assistant',content:j.reply});localStorage.setItem('vx_hist',JSON.stringify(hist.slice(-60)))}
+  catch(e){b.textContent=(lang==='ar'?'تعذر الاتصال: ':'Connection failed: ')+e.message;hist.pop()}}
+$('send').onclick=send;$('q').onkeydown=e=>{if(e.key==='Enter')send()};
+
+/* تفعيل الاشتراك */
+$('act').onclick=async()=>{const m=$('actm'),c=$('code').value.trim();if(!c)return;if(!token()){openAuth();return}
+  if(!API){m.style.color='var(--dn)';m.textContent='Backend not connected.';return}
+  try{const r=await fetch(API+'/api/subscription/activate',{method:'POST',headers:{'Content-Type':'application/json',...H()},body:JSON.stringify({code:c})});
+    const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
+    m.style.color='var(--up)';m.textContent=`${j.plan} · ${j.expires_at}`}
+  catch(e){m.style.color='var(--dn)';m.textContent=e.message}};
+
+/* ===== الحساب + لوحة المستخدم + الأكاديمية + الإدارة ===== */
+let me=null,lvl='beginner',meReady=false,AVURL=null,lastKey='';
+const num=(x,d=2)=>Number(x||0).toFixed(d), pc=v=>v>=0?'up':'dn', MK7=SY.map(x=>x[0]);
+async function call(p,o={}){
+  if(!API)throw new Error('اضبط رابط الخادم أولًا من زر الحساب.');
+  const hd={...H()};let body;
+  if(o.json){hd['Content-Type']='application/json';body=JSON.stringify(o.json)}
+  const r=await fetch(API+p,{method:o.method||(body?'POST':'GET'),headers:hd,body});
+  const j=await r.json().catch(()=>({}));
+  if(r.status===401&&token()){localStorage.removeItem('vx_token');me=null;paint()}
+  if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j}
+function paint(){
+  const ad=!!me&&me.user.role==='admin';
+  $('acct').textContent=me?me.user.email.split('@')[0]:'تسجيل الدخول';
+  route();
+  document.querySelectorAll('.li').forEach(e=>e.style.display=me?'':'none');$('adl').style.display=ad?'':'none'}
+function openAuth(){$('srv').value=API;$('am').textContent='';$('mout').style.display=me?'none':'';$('min').style.display=me?'':'none';
+  if(me)$('inf').textContent=`${me.user.email} · ${me.user.plan.toUpperCase()}${me.user.plan_expires?' · حتى '+me.user.plan_expires.slice(0,10):''}`;$('mod').classList.add('on')}
+function setSrv(){const v=$('srv').value.trim().replace(/\/+$/,'');if(v&&v!==API){try{new URL(v)}catch{throw new Error('رابط الخادم غير صالح.')}API=v;localStorage.setItem('vx_api',v);checkSys()}}
+async function authGo(path){const m=$('am');m.textContent='';
+  try{setSrv();const j=await call(path,{json:{email:$('em').value.trim(),password:$('pw').value}});localStorage.setItem('vx_token',j.token);$('pw').value='';await boot();$('mod').classList.remove('on')}catch(e){m.textContent=e.message}}
+function logout(){localStorage.removeItem('vx_token');localStorage.removeItem('vx_hist');location.reload()}
+$('acct').onclick=openAuth;$('bClose').onclick=()=>$('mod').classList.remove('on');$('bLogin').onclick=()=>authGo('/api/auth/login');$('bReg').onclick=()=>authGo('/api/auth/register');$('bOut').onclick=logout;
+$('srv').onchange=()=>{try{setSrv()}catch(e){$('am').textContent=e.message}};
+addEventListener('keydown',e=>{if(e.key==='Escape')$('mod').classList.remove('on')});
+async function boot(){if(token()&&API){try{me=await call('/api/me')}catch(e){me=null}}else me=null;meReady=true;paint();if(me)loadAvatar()}
+addEventListener('hashchange',()=>{if(me&&location.hash==='#dash')loadDash()});
+
+const list=(a,f,empty)=>a.length?a.map(f).join(''):`<p style="color:var(--m);font-size:14px">${empty}</p>`;
+function drawPnl(p){const c=$('d-c'),x=c.getContext('2d'),d=devicePixelRatio||1,W=c.clientWidth,Hh=c.clientHeight;c.width=W*d;c.height=Hh*d;x.scale(d,d);
+  if(p.length<2){x.fillStyle='#8d97ad';x.font='13px sans-serif';x.fillText('أغلق صفقتين على الأقل لعرض منحنى الأداء',12,Hh/2);return}
+  const mn=Math.min(0,...p),mx=Math.max(0,...p),Y=v=>Hh-10-(v-mn)/((mx-mn)||1)*(Hh-20),X=i=>10+i/(p.length-1)*(W-20);
+  x.strokeStyle='rgba(255,255,255,.15)';x.beginPath();x.moveTo(0,Y(0));x.lineTo(W,Y(0));x.stroke();
+  const g=x.createLinearGradient(0,0,W,0);g.addColorStop(0,'#1688ff');g.addColorStop(1,'#813cff');x.strokeStyle=g;x.lineWidth=2.5;x.beginPath();
+  p.forEach((v,i)=>i?x.lineTo(X(i),Y(v)):x.moveTo(X(i),Y(v)));x.stroke()}
+async function loadDash(){
+  try{
+    const [m,st,tr,an,nt,nw,wl]=await Promise.all(['/api/me','/api/stats','/api/trades','/api/analyses','/api/notifications','/api/news','/api/watchlist'].map(p=>call(p)));
+    me=m;const q=m.quota;
+    $('d_m').innerHTML=MK7.map(n=>`<option>${n}</option>`).join('');
+    $('d-k').innerHTML=[['الخطة',m.user.plan.toUpperCase()],['التحليلات (شهريًا)',`${q.analyses.used}/${q.analyses.limit}`],['المساعد (يوميًا)',`${q.chat.used}/${q.chat.limit}`],['الصفقات',st.total],['المفتوحة',st.open],['الناجحة',st.wins],['الخاسرة',st.losses],['نسبة النجاح',st.win_rate+'%'],['الربح/الخسارة',`<span class="${pc(st.pnl)}">${num(st.pnl,4)}</span>`]]
+      .map(([k,v])=>`<div class="card"><span style="color:var(--m);font-size:13px">${k}</span><b>${v}</b></div>`).join('');
+    $('d-t').innerHTML='<tr><th>السوق</th><th>الاتجاه</th><th>الدخول</th><th>الخروج</th><th>النتيجة</th><th></th></tr>'+(tr.length?tr.map(t=>`<tr><td>${esc(t.market)}</td><td class="${t.side==='BUY'?'up':'dn'}">${t.side}</td><td>${t.entry}</td><td>${t.exit_price??'—'}</td><td class="${pc(t.pnl)}">${t.pnl==null?'—':num(t.pnl,4)}</td><td>${t.status==='open'?`<button class="btn o sm" data-a="close" data-id="${t.id}">إغلاق</button>`:''}</td></tr>`).join(''):'<tr><td colspan="6" style="color:var(--m)">لا توجد صفقات بعد.</td></tr>');
+    let s=0;drawPnl(tr.filter(t=>t.status==='closed').reverse().map(t=>s+=t.pnl));
+    $('d-w').innerHTML=MK7.map(n=>{const on=wl.includes(n);return `<button class="${on?'on':''}" data-a="wl" data-id="${n}" data-on="${on?1:0}">${n}</button>`}).join('');
+    $('d-a').innerHTML=list(an.slice(0,10),a=>`<div class="li2"><span>${esc(a.market)} · ${esc(a.timeframe)} · ${esc(a.style)}</span><span class="${/buy/i.test(a.result.direction)?'up':'dn'}">${esc(a.result.direction)} · ${esc(a.result.confidence)}%</span></div>`,'لم تُجرِ تحليلات بعد.');
+    $('d-n').innerHTML=list(nt.slice(0,8),n=>`<div class="li2"><div><b>${esc(n.title)}</b><br><span style="color:var(--m)">${esc(n.body)}</span></div></div>`,'لا توجد إشعارات.');
+    $('d-nw').innerHTML=list(nw.slice(0,8),n=>`<div class="li2"><div><b>${esc(n.title)}</b><br><span style="color:var(--m)">${esc(n.body)}</span></div></div>`,'لا توجد أخبار.');
+  }catch(e){$('d-k').innerHTML=`<div class="err">${esc(e.message)}</div>`}}
+async function loadAcademy(l){lvl=l||lvl;document.querySelectorAll('#ac-t button').forEach(b=>b.classList.toggle('on',b.dataset.id===lvl));
+  try{const ls=(await call('/api/lessons')).filter(x=>x.level===lvl);
+    $('ac-l').innerHTML=list(ls,x=>`<details><summary>${esc(x.title)}</summary><p>${esc(x.body)}</p>${/^https?:\/\//i.test(x.media_url||'')?`<p><a style="color:#6aa3ff" href="${esc(x.media_url)}" target="_blank" rel="noopener noreferrer">فتح الوسائط</a></p>`:''}</details>`,'لا توجد دروس بعد.')}
+  catch(e){$('ac-l').innerHTML=`<div class="err">${esc(e.message)}</div>`}}
+
+const SETL={analyses_free:'تحليلات Free/شهر',analyses_pro:'تحليلات Pro/شهر',analyses_vip:'تحليلات VIP/شهر',chat_free:'رسائل Free/يوم',chat_pro:'رسائل Pro/يوم',chat_vip:'رسائل VIP/يوم',price_in_per_m:'سعر الإدخال $/مليون',price_out_per_m:'سعر الإخراج $/مليون'};
+async function loadAdmin(){
+  try{
+    const [u,us,cd,se,ls,nw]=await Promise.all(['/api/admin/users','/api/admin/usage','/api/admin/codes','/api/admin/settings','/api/lessons','/api/news'].map(p=>call(p)));
+    $('a-use').innerHTML=[['المستخدمون',u.length],['التحليلات',us.analyses.n],['رسائل المساعد',us.chats.n],['توكن الإدخال',us.analyses.i+us.chats.i+us.signals.i],['توكن الإخراج',us.analyses.o+us.chats.o+us.signals.o],['التكلفة التقديرية $',us.estimated_cost_usd],['النموذج',esc(us.model)]].map(([k,v])=>`<div class="card"><span style="color:var(--m);font-size:13px">${k}</span><b style="font-size:17px">${v}</b></div>`).join('');
+    $('a-users').innerHTML='<tr><th>البريد</th><th>الدور</th><th>الخطة</th><th>ينتهي / تمديد</th><th>تحليلات</th><th>نقاط</th><th></th></tr>'+u.map(x=>`<tr><td>${esc(x.email)}</td><td>${esc(x.role)}</td><td><select style="margin:0">${['free','pro','vip'].map(p=>`<option ${p===x.plan?'selected':''}>${p}</option>`).join('')}</select></td><td>${esc((x.plan_expires||'').slice(0,10))} <input type="number" placeholder="أيام" style="width:76px;margin:0"></td><td>${x.analyses}</td><td><input type="number" class="pts" min="0" value="${x.points}" style="width:76px;margin:0"></td><td><button class="btn sm" data-a="usave" data-id="${x.id}">حفظ</button> <button class="btn o sm" data-a="udel" data-id="${x.id}">حذف</button></td></tr>`).join('');
+    $('a-codes').innerHTML='<tr><th>الرمز</th><th>الخطة</th><th>الأيام</th><th>الحالة</th></tr>'+cd.map(c=>`<tr><td dir="ltr">${esc(c.code)}</td><td>${esc(c.plan)}</td><td>${c.days}</td><td>${c.used_by?'مستخدم':'متاح'}</td></tr>`).join('');
+    $('a-set').innerHTML=Object.keys(SETL).map(k=>`<label style="flex:1;min-width:150px">${SETL[k]}<input type="number" step="any" data-k="${k}" value="${se[k]}" style="margin:4px 0 0"></label>`).join('');
+    $('a-ls').innerHTML='<b>الدروس</b>'+list(ls,x=>`<div class="li2"><span>${esc(x.level)} · ${esc(x.title)}</span><button class="btn o sm" data-a="ldel" data-id="${x.id}">حذف</button></div>`,'لا دروس.');
+    $('a-nw').innerHTML='<b>الأخبار</b>'+list(nw,x=>`<div class="li2"><span>${esc(x.title)}</span><button class="btn o sm" data-a="ndel" data-id="${x.id}">حذف</button></div>`,'لا أخبار.');
+  }catch(e){$('a-use').innerHTML=`<div class="err">${esc(e.message)}</div>`}}
+
+const SEED=[['beginner','أساسيات التداول','ما هو التداول، الأسواق، الرافعة، السبريد، والمصطلحات الأولى.'],['beginner','الشموع اليابانية','قراءة الشمعة: الجسم والظلال، وأنماط الانعكاس والاستمرار.'],['beginner','الدعم والمقاومة','كيف تحدد المستويات المهمة وتتعامل مع الكسر والارتداد.'],['beginner','إدارة رأس المال','نسبة المخاطرة لكل صفقة، حجم العقد، ونسبة العائد إلى المخاطرة.'],
+['advanced','Smart Money Concepts','فكرة تحرك السيولة المؤسسية وكيف تُقرأ على الشارت.'],['advanced','Order Blocks','تحديد آخر شمعة معاكسة قبل الحركة الدافعة والتعامل مع إعادة الاختبار.'],['advanced','Liquidity','مناطق تجمع أوامر الوقف وكيف يستهدفها السعر.'],['advanced','Fair Value Gaps','الفجوات السعرية وأسباب عودة السعر لملئها.'],['advanced','Market Structure','الاتجاه، BOS وCHoCH، وتحديد تغير الهيكل.'],['advanced','Risk Management','وقف الخسارة، الأهداف الجزئية، والحد الأقصى للخسارة اليومية.']];
+const val=i=>$(i).value.trim();
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,id=b.dataset.id;
+  try{
+    if(a==='lv')return loadAcademy(id);
+    if(a==='addtrade'){await call('/api/trades',{json:{market:val('d_m'),side:val('d_s'),entry:+val('d_e')}});$('d_e').value='';return loadDash()}
+    if(a==='close'){const v=prompt('سعر الإغلاق:');if(!v)return;await call(`/api/trades/${id}/close`,{method:'PATCH',json:{exit_price:+v}});return loadDash()}
+    if(a==='wl'){await call('/api/watchlist/'+encodeURIComponent(id),{method:b.dataset.on==='1'?'DELETE':'PUT'});return loadDash()}
+    if(!me||me.user.role!=='admin')return;
+    if(a==='usave'){const r=b.closest('tr'),plan=r.querySelector('select').value,d=r.querySelector('input').value,j={plan,points:+r.querySelector(".pts").value};if(d)j.days=+d;
+      if(plan!=='free'&&!d&&!r.children[3].textContent.trim()){alert('حدد عدد الأيام للخطة المدفوعة.');return}
+      await call('/api/admin/users/'+id,{method:'PATCH',json:j})}
+    else if(a==='udel'){if(!confirm('حذف المستخدم وكل بياناته؟'))return;await call('/api/admin/users/'+id,{method:'DELETE'})}
+    else if(a==='adduser'){await call('/api/admin/users',{json:{email:val('a_e'),password:$('a_p').value,plan:val('a_pl'),role:val('a_r'),days:+val('a_d')||0}})}
+    else if(a==='gencode'){const j=await call('/api/admin/codes',{json:{plan:val('c_pl'),days:+val('c_d'),count:+val('c_n')}});const t=$('c_out');t.style.display='block';t.value=j.codes.join('\n')}
+    else if(a==='savesets'){const o={};document.querySelectorAll('#a-set input').forEach(i=>o[i.dataset.k]=+i.value);await call('/api/admin/settings',{method:'PUT',json:o})}
+    else if(a==='addnews'){await call('/api/admin/news',{json:{title:val('n_t'),body:val('n_b')}})}
+    else if(a==='addlesson'){await call('/api/admin/lessons',{json:{level:val('l_l'),title:val('l_t'),body:$('l_b').value,media_url:val('l_u')||null}})}
+    else if(a==='seed'){if(!confirm('إضافة 10 دروس افتراضية؟'))return;for(const [level,title,body] of SEED)await call('/api/admin/lessons',{json:{level,title,body}})}
+    else if(a==='addnote'){await call('/api/admin/notifications',{json:{title:val('o_t'),body:val('o_b'),user_id:val('o_u')?+val('o_u'):null}})}
+    else if(a==='runauto'){await call('/api/admin/signals/run',{json:{}});alert('بدأ التحليل. حدّث صفحة التلقائي بعد دقيقة.');return}
+    else if(a==='ldel'){await call('/api/admin/lessons/'+id,{method:'DELETE'})}
+    else if(a==='ndel'){await call('/api/admin/news/'+id,{method:'DELETE'})}
+    else return;
+    loadAdmin();loadAcademy();
+  }catch(err){alert(err.message)}});
+async function loadAuto(){try{const j=await call('/api/signals');
+  $('au-m').textContent=j.interval_min?`يتجدد تلقائيًا كل ${j.interval_min} دقيقة · الإطار ${j.timeframe}`:'التحليل التلقائي متوقف في الخادم.';
+  $('au-l').innerHTML=list(j.signals,s=>{const r=s.result,buy=/buy/i.test(r.direction);
+    return `<div class="card"><div class="row2" style="justify-content:space-between"><b>${esc(s.market)}</b><span class="${r.direction==='NO_TRADE'?'':buy?'up':'dn'}" style="font-weight:700">${esc(r.direction)}</span></div><div style="color:var(--m);font-size:12px;margin-bottom:6px">${esc(s.created_at)} UTC · السعر ${esc(s.price)} · ثقة ${esc(r.confidence)}%</div>${[['ENTRY',r.entry],['SL',r.stop_loss],['TP1',r.tp1],['TP2',r.tp2],['TP3',r.tp3]].map(([k,v])=>`<div class="li2"><span>${k}</span><b dir="ltr">${esc(v)}</b></div>`).join('')}<details><summary>سبب التحليل</summary><p>${esc(r.structure)}\n${esc(r.reason)}</p></details></div>`},'لم يصدر تحليل بعد. يبدأ الخادم أول دورة بعد التشغيل بدقائق.')}
+  catch(e){$('au-l').innerHTML=`<div class="err">${esc(e.message)}</div>`}}
+setInterval(()=>{if(me)loadAuto()},60000);
+
+
+/* ===================== VANTIX INFINITY: 3D + motion + sound ===================== */
+const red=matchMedia('(prefers-reduced-motion: reduce)').matches, mob=matchMedia('(max-width:860px), (pointer:coarse)').matches;
+const ptr={x:0,y:0},gy={x:0,y:0};
+addEventListener('pointermove',e=>{ptr.x=e.clientX/innerWidth*2-1;ptr.y=e.clientY/innerHeight*2-1},{passive:true});
+function gyro(e){if(e.gamma==null)return;gy.x=Math.max(-1,Math.min(1,e.gamma/30));gy.y=Math.max(-1,Math.min(1,(e.beta-45)/30))}
+
+/* ---- مشهد Three.js ---- */
+(function scene(){
+  if(typeof THREE==='undefined')return;
+  let R;try{R=new THREE.WebGLRenderer({canvas:$('gl'),antialias:!mob,alpha:true,powerPreference:'high-performance'})}catch(e){return}
+  if(!R.getContext())return;
+  window.__gl=true;
+  let pr=Math.min(devicePixelRatio||1,mob?1.5:2);R.setPixelRatio(pr);
+  const sc=new THREE.Scene();sc.fog=new THREE.FogExp2(0x03070d,.04);
+  const cam=new THREE.PerspectiveCamera(50,1,.1,100);cam.position.set(0,0,8);
+  sc.add(new THREE.AmbientLight(0x2a3a66,.7));
+  const L1=new THREE.PointLight(0x1688ff,6,40);L1.position.set(-6,3,5);
+  const L2=new THREE.PointLight(0x6c3bff,6,40);L2.position.set(6,-3,5);
+  const L3=new THREE.PointLight(0xffffff,1.2,30);L3.position.set(0,6,6);sc.add(L1,L2,L3);
+  const orb=new THREE.Group();sc.add(orb);
+  const body=new THREE.Mesh(new THREE.IcosahedronGeometry(2.1,mob?3:5),new THREE.MeshStandardMaterial({color:0x0b1226,metalness:1,roughness:.22,transparent:true,opacity:.6}));
+  const shell=new THREE.Mesh(new THREE.IcosahedronGeometry(2.25,2),new THREE.MeshBasicMaterial({color:0x1688ff,wireframe:true,transparent:true,opacity:.2}));
+  const vs=new THREE.Shape();[[-1,1],[-.4,1],[0,.05],[.4,1],[1,1],[0,-1.25]].forEach((p,i)=>i?vs.lineTo(p[0],p[1]):vs.moveTo(p[0],p[1]));vs.closePath();
+  const lg=new THREE.ExtrudeGeometry(vs,{depth:.3,bevelEnabled:true,bevelThickness:.06,bevelSize:.06,bevelSegments:2});lg.center();
+  const logo=new THREE.Mesh(lg,new THREE.MeshStandardMaterial({color:0xaec4ff,metalness:1,roughness:.18,emissive:0x1688ff,emissiveIntensity:.7}));logo.scale.setScalar(.8);
+  orb.add(body,shell,logo);
+  const glowTex=c=>{const k=document.createElement('canvas');k.width=k.height=128;const g=k.getContext('2d'),r=g.createRadialGradient(64,64,0,64,64,64);r.addColorStop(0,c);r.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=r;g.fillRect(0,0,128,128);return new THREE.CanvasTexture(k)};
+  [['rgba(22,136,255,.9)',11,-.8,.6],['rgba(108,59,255,.9)',9,1,-.8]].forEach(a=>{const m=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex(a[0]),transparent:true,opacity:.5,blending:THREE.AdditiveBlending,depthWrite:false}));m.scale.set(a[1],a[1],1);m.position.set(a[2],a[3],-1.5);orb.add(m)});
+  const rings=[0,1,2].map(i=>{const m=new THREE.Mesh(new THREE.TorusGeometry(2.6,.014,8,mob?96:180),new THREE.MeshBasicMaterial({color:i%2?0x6c3bff:0x1688ff,transparent:true,opacity:.5,blending:THREE.AdditiveBlending,depthWrite:false}));m.rotation.x=Math.PI/2.4;m.rotation.y=i*.35;orb.add(m);return m});
+  const fl=[],addF=(g,m,x,y,z)=>{const o=new THREE.Mesh(g,m);o.position.set(x,y,z);o.userData={y:y,s:Math.random()*6};sc.add(o);fl.push(o)};
+  const wm=c=>new THREE.MeshBasicMaterial({color:c,wireframe:true,transparent:true,opacity:.5});
+  addF(new THREE.OctahedronGeometry(.6),wm(0x1688ff),-6,2.6,-2);
+  addF(new THREE.TorusKnotGeometry(.4,.12,mob?48:90,8),new THREE.MeshStandardMaterial({color:0x6c3bff,metalness:1,roughness:.25}),6,2,-1);
+  addF(new THREE.DodecahedronGeometry(.5),wm(0x6c3bff),5.2,-3,-2.5);
+  addF(new THREE.IcosahedronGeometry(.45),new THREE.MeshStandardMaterial({color:0x1688ff,metalness:1,roughness:.3}),-5.2,-2.8,-1);
+  const pts=(n,c,sz)=>{const g=new THREE.BufferGeometry(),a=new Float32Array(n*3);for(let i=0;i<n;i++){a[i*3]=(Math.random()-.5)*28;a[i*3+1]=(Math.random()-.5)*16;a[i*3+2]=(Math.random()-.5)*16}
+    g.setAttribute('position',new THREE.BufferAttribute(a,3));const p=new THREE.Points(g,new THREE.PointsMaterial({color:c,size:sz,transparent:true,opacity:.85,blending:THREE.AdditiveBlending,depthWrite:false}));sc.add(p);return p};
+  const P1=pts(mob?450:1400,0x00d9ff,.05),P2=pts(mob?150:450,0xa58bff,.09);
+  function rs(){R.setSize(innerWidth,innerHeight,false);cam.aspect=innerWidth/innerHeight;cam.updateProjectionMatrix();if(red)R.render(sc,cam)}
+  rs();addEventListener('resize',rs);
+  let t0=performance.now(),fr=0,acc=0,tuned=0,cy=0;
+  function loop(now){requestAnimationFrame(loop);if(document.hidden){t0=now;return}
+    const dt=Math.min(now-t0,100);t0=now;acc+=dt;fr++;
+    if(tuned<2&&fr>90){if(acc/fr>24&&pr>1){pr=1;R.setPixelRatio(1);rs();P1.geometry.setDrawRange(0,mob?250:700)}tuned++;fr=0;acc=0} /* جودة تكيفية */
+    const t=now/1000,asp=innerWidth/innerHeight,rtl=document.documentElement.dir==='rtl',sy=scrollY/innerHeight;
+    const hm=!window.__view||window.__view==='home',tx=asp<1?0:(rtl?-3.1:3.1)*(hm?1:1.6),ty=asp<1?(hm?2.1:3.4):0,ts=(asp<1?.62:1)*(hm?1:.7);
+    orb.position.x+=(tx-orb.position.x)*.06;orb.position.y+=(ty-orb.position.y)*.06;orb.scale.setScalar(orb.scale.x+(ts-orb.scale.x)*.06);
+    orb.rotation.y=t*.25+ptr.x*.5+gy.x*.4;orb.rotation.x=Math.sin(t*.3)*.08+ptr.y*.25+gy.y*.3;logo.rotation.y=Math.sin(t*.8)*.5;shell.rotation.y=-t*.12;
+    rings.forEach((m,i)=>{const p=(t*.22+i/3)%1;m.scale.setScalar(.9+p*.9);m.material.opacity=.55*(1-p)});
+    fl.forEach(o=>{o.rotation.x+=.004;o.rotation.y+=.006;o.position.y=o.userData.y+Math.sin(t*.7+o.userData.s)*.35});
+    P1.rotation.y=t*.012;P2.rotation.y=-t*.02;
+    cam.position.x+=((ptr.x+gy.x)*.7-cam.position.x)*.04;cy+=(-sy*1.6-cy)*.06;
+    cam.position.y+=((-ptr.y*.4+cy)-cam.position.y)*.05;cam.position.z=8+Math.min(sy,2)*1.2;cam.lookAt(0,cy*.4,0);
+    L1.position.x=-6+Math.sin(t*.5)*2;L2.position.x=6+Math.cos(t*.4)*2;
+    R.render(sc,cam)}
+  if(!red)requestAnimationFrame(loop);
+})();
+
+/* ---- الصوت (متوقف افتراضيًا) ---- */
+const SND={fx:localStorage.getItem('vx_fx')==='1',amb:localStorage.getItem('vx_amb')==='1'};let ACX,ambN=null;
+const audio=()=>ACX||(ACX=new (window.AudioContext||window.webkitAudioContext)());
+function tone(f,d,ty,v,w){const a=audio(),o=a.createOscillator(),g=a.createGain(),t=a.currentTime+(w||0);o.type=ty||'sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v||.04,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.02)}
+function vxSnd(k){if(!SND.fx)return;try{if(k==='click')tone(880,.07,'triangle',.03);else if(k==='start'){tone(220,.5,'sawtooth',.02);tone(440,.5,'sine',.03,.05)}else if(k==='done')[523,659,784].forEach((f,i)=>tone(f,.4,'sine',.04,i*.1));else if(k==='err')tone(160,.35,'square',.03)}catch(e){}}
+function ambient(on){if(!on){if(ambN)ambN.forEach(n=>{try{n.stop()}catch(e){}});ambN=null;return}if(ambN)return;try{const a=audio(),g=a.createGain();g.gain.value=.018;g.connect(a.destination);ambN=[110,164.8,220].map((f,i)=>{const o=a.createOscillator();o.type='sine';o.frequency.value=f;o.detune.value=i*4;o.connect(g);o.start();return o})}catch(e){}}
+$('sFx').checked=SND.fx;$('sAmb').checked=SND.amb;$('sGy').checked=localStorage.getItem('vx_gy')==='1';
+$('sFx').onchange=e=>{SND.fx=e.target.checked;localStorage.setItem('vx_fx',SND.fx?1:0);vxSnd('click')};
+$('sAmb').onchange=e=>{SND.amb=e.target.checked;localStorage.setItem('vx_amb',SND.amb?1:0);ambient(SND.amb)};
+$('sGy').onchange=async e=>{if(!e.target.checked){localStorage.setItem('vx_gy',0);removeEventListener('deviceorientation',gyro);return}
+  try{if(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission&&await DeviceOrientationEvent.requestPermission()!=='granted'){e.target.checked=false;return}addEventListener('deviceorientation',gyro);localStorage.setItem('vx_gy',1)}catch(err){e.target.checked=false}};
+if(localStorage.getItem('vx_gy')==='1'&&!(window.DeviceOrientationEvent&&DeviceOrientationEvent.requestPermission))addEventListener('deviceorientation',gyro);
+addEventListener('pointerdown',()=>{if(SND.amb)ambient(true)},{once:true});
+document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('button'))vxSnd('click')});
+new MutationObserver(()=>{const r=$('res');if(r.querySelector('.dir'))vxSnd('done');else if(r.querySelector('.err'))vxSnd('err')}).observe($('res'),{childList:true});
+
+/* ---- مراحل التحليل (عرض للتقدم فقط، النتيجة من الخادم) ---- */
+let stT;const STG=['Market Structure · BOS · CHoCH','Order Blocks','Fair Value Gaps','Liquidity','Support / Resistance','Premium / Discount','Entry Zones'];
+function vxStages(out,ar){let i=0;vxSnd('start');const r=()=>{out.innerHTML=`<div style="display:flex;gap:14px;align-items:center"><div class="sp"></div><div><b>${ar?'جارٍ تحليل الشارت…':'Analyzing chart…'}</b><div style="color:var(--m);font-size:13px">${ar?'الطلب يشمل فحص: ':'Requested checks: '}${STG[i%STG.length]}</div></div></div>`;i++};r();clearInterval(stT);stT=setInterval(r,1100)}
+function vxStagesStop(){clearInterval(stT)}
+
+/* ---- أزرار مغناطيسية بنابض + إمالة البطاقات ---- */
+const MG=new WeakMap();
+function mag(b,tx,ty){let q=MG.get(b);if(!q){q={x:0,y:0,vx:0,vy:0,tx:0,ty:0,run:false};MG.set(b,q)}q.tx=tx;q.ty=ty;if(q.run)return;q.run=true;
+  (function st(){q.vx=(q.vx+(q.tx-q.x)*.16)*.72;q.vy=(q.vy+(q.ty-q.y)*.16)*.72;q.x+=q.vx;q.y+=q.vy;b.style.translate=q.x.toFixed(2)+'px '+q.y.toFixed(2)+'px';
+    if(Math.abs(q.vx)+Math.abs(q.vy)+Math.abs(q.tx-q.x)+Math.abs(q.ty-q.y)>.05)requestAnimationFrame(st);else{q.run=false;if(!q.tx&&!q.ty)b.style.translate=''}})()}
+if(!red&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+  let cb=null,tc=null;const SEL='.stats .card,.grid3 .card,.k4 .card';
+  const rst=c=>{c.style.transform='';c.style.transition=''};
+  document.addEventListener('pointermove',e=>{const t=e.target;if(!t.closest)return;
+    const b=t.closest('.btn:not(.sm)');if(cb&&cb!==b){mag(cb,0,0);cb=null}
+    if(b){const r=b.getBoundingClientRect();mag(b,(e.clientX-r.left-r.width/2)*.28,(e.clientY-r.top-r.height/2)*.28);cb=b}
+    const c=t.closest(SEL);if(tc&&tc!==c){rst(tc);tc=null}
+    if(c){tc=c;const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+      c.style.transition='transform .12s linear';c.style.transform='perspective(800px) rotateX('+(-y*9).toFixed(2)+'deg) rotateY('+(x*9).toFixed(2)+'deg)';
+      c.style.setProperty('--gx',(x+.5)*100+'%');c.style.setProperty('--gy',(y+.5)*100+'%')}});
+  document.addEventListener('mouseleave',()=>{if(tc){rst(tc);tc=null}if(cb){mag(cb,0,0);cb=null}});
+}
+
+/* ---- تتبع القسم النشط + مؤشر التنقل + بارالاكس ---- */
+const navL=document.querySelector('nav .links'),ind=document.createElement('i');ind.id='ind';navL.appendChild(ind);
+function spy(){let best=null,bd=1e9;
+  document.querySelectorAll('nav .links a, .bot a').forEach(a=>{const s=document.querySelector(a.getAttribute('href'));if(!s||!s.offsetHeight)return;const r=s.getBoundingClientRect(),d=Math.abs(r.top-120);if(r.top<innerHeight*.6&&r.bottom>120&&d<bd){bd=d;best=a.getAttribute('href')}});
+  document.querySelectorAll('nav .links a, .bot a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')===best));
+  const a=best&&navL.querySelector('a[href="'+best+'"]');
+  if(a&&a.offsetWidth){ind.style.opacity=1;ind.style.width=a.offsetWidth+'px';ind.style.transform='translateX('+a.offsetLeft+'px)'}else ind.style.opacity=0}
+const heroEl=document.querySelector('.hero');let tk=0;
+addEventListener('scroll',()=>{if(tk)return;tk=requestAnimationFrame(()=>{tk=0;if(!red&&heroEl){heroEl.style.transform='translate3d(0,'+(-scrollY*.12).toFixed(1)+'px,0)';heroEl.style.opacity=Math.max(0,1-scrollY/(innerHeight*.85)).toFixed(2)}spy()})},{passive:true});
+addEventListener('resize',spy);
+const _paint=paint;paint=function(){_paint();spy()};spy();
+
+/* ---- المقدمة السينمائية ---- */
+function playIntro(force){
+  const body=document.body;
+  if(!force&&(localStorage.getItem('vx_intro')||red)){body.classList.add('ready');return}
+  body.classList.remove('ready');body.classList.add('intro-on');setTimeout(()=>body.classList.add('ready'),9000);
+  const ov=document.createElement('div');ov.id='intro';ov.innerHTML='<canvas></canvas><div class="sl">TRADE SMARTER. THINK BEYOND.</div><div class="sweep"></div><button class="btn o sm" id="skip">تخطي المقدمة</button>';
+  body.appendChild(ov);
+  const c=ov.firstChild,x=c.getContext('2d');let fin=false,raf;
+  const W=c.width=innerWidth,Hh=c.height=innerHeight;
+  const end=()=>{if(fin)return;fin=true;cancelAnimationFrame(raf);ov.classList.add('out');setTimeout(()=>ov.remove(),1000);localStorage.setItem('vx_intro','1');body.classList.add('ready')};
+  $('skip').onclick=end;
+  (document.fonts&&document.fonts.ready||Promise.resolve()).then(()=>{if(fin)return;
+    const o=document.createElement('canvas');o.width=W;o.height=Hh;const ox=o.getContext('2d');
+    ox.font='700 '+Math.min(W/4.2,170)+'px "Space Grotesk",sans-serif';ox.textAlign='center';ox.textBaseline='middle';ox.fillText('VANTIX',W/2,Hh/2-20);
+    const d=ox.getImageData(0,0,W,Hh).data,st=W<700?5:4,P=[];
+    for(let yy=0;yy<Hh;yy+=st)for(let xx=0;xx<W;xx+=st)if(d[(yy*W+xx)*4+3]>128){const sx=Math.random()*W,sy=Math.random()*Hh;P.push({tx:xx,ty:yy,sx:sx,sy:sy,d:500+Math.random()*900})}
+    const t0=performance.now();let sw=false,sl=false;
+    (function f(now){raf=requestAnimationFrame(f);const t=now-t0;x.clearRect(0,0,W,Hh);
+      if(t<700){const r=3+Math.sin(t/60)*1.2,g=x.createRadialGradient(W/2,Hh/2,0,W/2,Hh/2,40);g.addColorStop(0,'rgba(80,140,255,.9)');g.addColorStop(1,'rgba(80,140,255,0)');x.fillStyle=g;x.fillRect(W/2-40,Hh/2-40,80,80);x.fillStyle='#fff';x.fillRect(W/2-r/2,Hh/2-r/2,r,r)}
+      else P.forEach(p=>{const k=Math.min(1,Math.max(0,(t-p.d)/1700)),e=1-Math.pow(1-k,4),px=p.sx+(p.tx-p.sx)*e,py=p.sy+(p.ty-p.sy)*e;
+        x.fillStyle=k>=1?'#cfe0ff':'rgba('+Math.round(60+150*e)+','+Math.round(120+100*e)+',255,'+(.35+.65*e).toFixed(2)+')';x.fillRect(px,py,2.2,2.2)});
+      if(t>2700&&!sw){sw=true;ov.classList.add('sw')}
+      if(t>3100&&!sl){sl=true;ov.classList.add('s')}
+      if(t>5300)end()})(t0)});
+}
+playIntro(false);
+$('sIntro').onclick=()=>{$('mod').classList.remove('on');playIntro(true)};
+
+/* ===================== الراوتر والشريط الجانبي والحساب ===================== */
+document.body.classList.add('spa');
+const VIEWS={home:['.hero','#tape','#features','#faq'],analyze:['#analyze'],trading:['#trading'],live:['#auto'],history:['#history'],markets:['#tape','#market'],news:['#news'],assistant:['#assistant'],plans:['#plans'],account:['#account'],settings:['#settings'],academy:['#academy'],admin:['#admin']};
+const NEEDS={trading:1,live:1,history:1,account:1,academy:1,admin:2};
+function spy(){}
+function initNews(){
+  tv('n-tl','embed-widget-timeline.js',{feedMode:'market',market:'forex',isTransparent:true,displayMode:'regular',width:'100%',height:'100%',colorTheme:'dark',locale:'en'});
+  const ta=sy=>tv('n-ta','embed-widget-technical-analysis.js',{interval:'1h',width:'100%',isTransparent:true,height:'100%',symbol:sy,showIntervalTabs:true,displayMode:'single',locale:'en',colorTheme:'dark'});
+  ta(SY[0][1]);
+  $('n-t').innerHTML=SY.map(([n,sy],i)=>`<button class="${i?'':'on'}" data-s="${sy}">${n}</button>`).join('');
+  $('n-t').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#n-t button').forEach(x=>x.classList.toggle('on',x===b));ta(b.dataset.s)}}
+function enter(v){
+  if((v==='home'||v==='markets')&&!tapeInit){tapeInit=1;mkTape()}
+  if(v==='markets'&&!chartInit){chartInit=1;chart(SY[0][1])}
+  if(v==='news'&&!newsInit){newsInit=1;initNews()}
+  if(!me)return;
+  if(['trading','history','markets','news'].includes(v))loadDash();
+  if(v==='live')loadAuto();
+  if(v==='account')renderAccount();
+  if(v==='plans')renderPlans();
+  if(v==='academy')loadAcademy();
+  if(v==='admin'&&me.user.role==='admin')loadAdmin()}
+function route(){
+  let v=location.hash.slice(1);if(!VIEWS[v])v='home';
+  const ad=!!me&&me.user.role==='admin',lock=NEEDS[v]&&meReady&&(!me||(NEEDS[v]===2&&!ad));
+  if(lock){$('gate-t').textContent=!me?'سجّل الدخول للوصول إلى هذه الصفحة':'هذه الصفحة للمدير فقط';$('gateBtn').style.display=me?'none':''}
+  document.querySelectorAll('body.spa section, body.spa #tape').forEach(e=>e.classList.remove('vshow','on'));
+  (lock?['#gate']:VIEWS[v]).forEach(q=>document.querySelectorAll(q).forEach(e=>e.classList.add('vshow','on')));
+  const changed=window.__view!==v;window.__view=v;document.body.dataset.v=v;
+  document.querySelectorAll('[data-v]').forEach(a=>a.classList.toggle('on',a.dataset.v===v));
+  $('si-admin').style.display=ad?'':'none';
+  $('sf-n').textContent=me?(me.user.full_name||me.user.username||me.user.email.split('@')[0]):(lang==='ar'?'زائر':'Guest');
+  $('sf-p').textContent=me?me.user.plan.toUpperCase()+' · '+me.user.points+' نقطة':(lang==='ar'?'سجّل الدخول':'Sign in');
+  closeSide();
+  if(changed){scrollTo(0,0);if(heroEl){heroEl.style.transform='';heroEl.style.opacity=''}}
+  const key=v+(me?'1':'0')+(lock?'L':'');if(key!==lastKey){lastKey=key;if(!lock)enter(v)}}
+const sideEl=$('side'),sbk=$('sbk'),desk=()=>matchMedia('(min-width:1000px)').matches;
+function closeSide(){sideEl.classList.remove('open');sbk.classList.remove('on')}
+function toggleSide(){if(desk()){document.body.classList.toggle('rail');localStorage.setItem('vx_rail',document.body.classList.contains('rail')?1:0)}else{const o=sideEl.classList.toggle('open');sbk.classList.toggle('on',o)}}
+$('menu').onclick=toggleSide;$('sbx').onclick=toggleSide;sbk.onclick=closeSide;
+if(localStorage.getItem('vx_rail')==='1')document.body.classList.add('rail');
+sideEl.addEventListener('click',e=>{const a=e.target.closest('.si');if(!a)return;const r=a.getBoundingClientRect(),p=document.createElement('span');p.className='rip';p.style.left=(e.clientX-r.left)+'px';p.style.top=(e.clientY-r.top)+'px';a.appendChild(p);setTimeout(()=>p.remove(),650)});
+document.querySelector('.bot .ctr').addEventListener('click',e=>{const c=e.currentTarget;c.classList.remove('pop');void c.offsetWidth;c.classList.add('pop');vxSnd('click')});
+addEventListener('hashchange',route);
+addEventListener('keydown',e=>{if(e.key==='Escape')closeSide()});
+$('gateBtn').onclick=openAuth;
+function sbLang(){const en=document.documentElement.lang==='en';document.querySelectorAll('[data-en]').forEach(e=>e.textContent=en?e.dataset.en:e.dataset.ar);route()}
+$('lang').addEventListener('click',sbLang);
+
+/* ---- الصورة الشخصية ---- */
+async function loadAvatar(){
+  if(!me||!me.user.has_avatar){setAv(null);return}
+  try{const r=await fetch(API+'/api/profile/avatar',{headers:H()});if(!r.ok){setAv(null);return}const b=await r.blob();if(AVURL)URL.revokeObjectURL(AVURL);AVURL=URL.createObjectURL(b);setAv(AVURL)}catch(e){setAv(null)}}
+function setAv(u){document.querySelectorAll('img.av').forEach(i=>{if(u){i.src=u;i.style.display='block'}else{i.removeAttribute('src');i.style.display='none'}});document.querySelectorAll('.avph').forEach(e=>e.style.display=u?'none':'')}
+
+/* ---- صفحة حسابي ---- */
+function amsg(t,ok){const m=$('ac-msg');m.style.color=ok?'var(--up)':'var(--dn)';m.textContent=t}
+function renderAccount(){if(!me)return;const u=me.user,q=me.quota,paid=u.plan!=='free';
+  $('ac_name').value=u.full_name||'';$('ac_user').value=u.username||'';$('ac_phone').value=u.phone||'';$('ac_email').textContent=u.email;
+  $('ac-sub').innerHTML=[['الخطة',u.plan.toUpperCase()],['ينتهي في',paid&&u.plan_expires?u.plan_expires.slice(0,10):'—'],['رصيد النقاط','<span class="gold">'+u.points+'</span>'],['استُخدم هذا الشهر',q.analyses.used+' / '+q.analyses.limit],['المتبقي',Math.max(0,q.analyses.limit-q.analyses.used)],['رسائل اليوم',q.chat.used+' / '+q.chat.limit]]
+    .map(([k,v])=>`<div class="card"><span style="color:var(--m);font-size:13px">${k}</span><b>${v}</b></div>`).join('');
+  $('ac-ver').textContent=u.email_verified?'بريدك الإلكتروني موثّق.':'بريدك غير موثّق. التوثيق عبر رسالة بريدية يتطلب ربط خدمة بريد (SMTP) في الخادم، ولم تُفعَّل بعد.';
+  setAv(AVURL&&u.has_avatar?AVURL:null)}
+function renderPlans(){const c=$('pt-card');
+  if(!me){c.innerHTML='<p style="color:var(--m)">سجّل الدخول لعرض رصيد النقاط وحالة اشتراكك.</p>';return}
+  const u=me.user,q=me.quota;
+  c.innerHTML='<div class="k4">'+[['خطتك',u.plan.toUpperCase()],['ينتهي في',u.plan!=='free'&&u.plan_expires?u.plan_expires.slice(0,10):'—'],['رصيد النقاط','<span class="gold">'+u.points+'</span>'],['التحليلات المتبقية هذا الشهر',Math.max(0,q.analyses.limit-q.analyses.used)]].map(([k,v])=>`<div class="card"><span style="color:var(--m);font-size:13px">${k}</span><b>${v}</b></div>`).join('')+'</div><p style="color:var(--m);font-size:13px;margin-top:10px">كل نقطة تمنحك تحليلًا إضافيًا بعد نفاد حصتك الشهرية. يمنح المدير النقاط.</p>'}
+async function refreshMe(){me=await call('/api/me');paint();renderAccount()}
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('[data-ac]');if(!b)return;const a=b.dataset.ac;
+  try{
+    if(a==='lang')return $('lang').click();
+    if(a==='srv')return openAuth();
+    if(a==='logout')return logout();
+    if(!me){openAuth();return}
+    if(a==='avpick')return $('av_file').click();
+    if(a==='avdel'){await call('/api/profile/avatar',{method:'DELETE'});await refreshMe();await loadAvatar();return amsg('تمت إزالة الصورة.',1)}
+    if(a==='saveprof'){await call('/api/profile',{method:'PATCH',json:{full_name:val('ac_name'),username:val('ac_user'),phone:val('ac_phone')}});await refreshMe();return amsg('تم حفظ البيانات.',1)}
+    if(a==='chpw'){const j=await call('/api/auth/change-password',{json:{current:$('ac_cur').value,password:$('ac_new').value}});localStorage.setItem('vx_token',j.token);$('ac_cur').value=$('ac_new').value='';return amsg('تم تغيير كلمة المرور وإنهاء الجلسات الأخرى.',1)}
+    if(a==='chmail'){await call('/api/auth/change-email',{json:{password:$('ac_empw').value,new_email:val('ac_em')}});$('ac_empw').value=$('ac_em').value='';await refreshMe();return amsg('تم تغيير البريد. حالته الآن غير موثّقة.',1)}
+    if(a==='delacc'){if(!confirm('سيُحذف حسابك وكل بياناتك نهائيًا. متابعة؟'))return;const pw=prompt('أدخل كلمة المرور للتأكيد:');if(!pw)return;await call('/api/account',{method:'DELETE',json:{password:pw}});logout()}
+  }catch(err){amsg(err.message,0)}});
+$('av_file').onchange=async()=>{const f=$('av_file').files[0];$('av_file').value='';if(!f||!me)return;
+  try{const bm=await createImageBitmap(f),sq=Math.min(bm.width,bm.height),c=document.createElement('canvas');c.width=c.height=256;
+    c.getContext('2d').drawImage(bm,(bm.width-sq)/2,(bm.height-sq)/2,sq,sq,0,0,256,256);
+    const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.88)),fd=new FormData();fd.append('avatar',blob,'a.jpg');
+    const r=await fetch(API+'/api/profile/avatar',{method:'PUT',body:fd,headers:H()}),j=await r.json().catch(()=>({}));
+    if(!r.ok)throw new Error(j.error||('HTTP '+r.status));
+    await refreshMe();await loadAvatar();amsg('تم تحديث الصورة.',1)}catch(err){amsg(err.message,0)}};
+
+route();
+boot();
+</script>
+</body>
+</html>
